@@ -23,10 +23,11 @@ VGen can produce high-quality videos from the input text, images, desired motion
 
 
 ## 🔥News!!!
+- __[2023.12]__ We release the diffusion based expressive talking head generation [DreamTalk](https://dreamtalk-project.github.io)
 - __[2023.12]__ We release the high-efficiency video generation method [VideoLCM](https://arxiv.org/abs/2312.09109)
-- __[2023.12]__ We release the code and model of I2VGen-XL and the ModelScope T2V
+- __[2023.12]__ We release the code and model of [I2VGen-XL](https://i2vgen-xl.github.io) and the [ModelScope T2V](https://arxiv.org/abs/2308.06571)
 - __[2023.12]__ We release the T2V method [HiGen](https://higen-t2v.github.io) and customizing T2V method [DreamVideo](https://dreamvideo-t2v.github.io).
-- __[2023.12]__ We write an [introduction docment](doc/introduction.pdf) for VGen and compare I2VGen-XL with SVD.
+- __[2023.12]__ We write an [introduction document](doc/introduction.pdf) for VGen and compare I2VGen-XL with SVD.
 - __[2023.11]__ We release a high-quality I2VGen-XL model, please refer to the [Webpage](https://i2vgen-xl.github.io)
 
 
@@ -36,6 +37,7 @@ VGen can produce high-quality videos from the input text, images, desired motion
 - [ ] Release models optimized specifically for the human body and faces
 - [ ] Updated version can fully maintain the ID and capture large and accurate motions simultaneously
 - [ ] Release other methods and the corresponding models
+
 
 
 ## Preparation
@@ -54,6 +56,12 @@ conda activate vgen
 pip install torch==1.12.0+cu113 torchvision==0.13.0+cu113 torchaudio==0.12.0 --extra-index-url https://download.pytorch.org/whl/cu113
 pip install -r requirements.txt -i https://pypi.tuna.tsinghua.edu.cn/simple
 ```
+
+You  also need to ensure that your system has installed the `ffmpeg` command. If it is not installed, you can install it using the following command:
+```
+sudo apt-get update && apt-get install ffmpeg libsm6 libxext6  -y
+```
+
 
 ### Datasets
 
@@ -136,6 +144,14 @@ Then you can find the videos you generated in the `workspace/experiments/test_im
 from modelscope.hub.snapshot_download import snapshot_download
 model_dir = snapshot_download('damo/I2VGen-XL', cache_dir='models/', revision='v1.0.0')
 ```
+
+or you can also download it through HuggingFace (https://huggingface.co/damo-vilab/i2vgen-xl):
+```
+# Make sure you have git-lfs installed (https://git-lfs.com)
+git lfs install
+git clone https://huggingface.co/damo-vilab/i2vgen-xl
+```
+
 
 (ii) Run the following command:
 ```
@@ -234,7 +250,7 @@ In preparation.
 
 ## Customize your own approach
 
-Our codebase essentially supports all the commonly used components in video generation. You can manage your experiments flexibly by adding corresponding registration classes, including `ENGINE, MODEL, DATASETS, EMBEDDER, AUTO_ENCODER, DISTRIBUTION, VISUAL, DIFFUSION, PRETRAIN`, and can be compatible with all our open-source algorithms according to your own needs. If you have any questions, feel free to give us your feedback at any time.
+Our codebase essentially supports all the commonly used components in video generation. You can manage your experiments flexibly by adding corresponding registration classes, including `ENGINE, MODEL, DATASETS, EMBEDDER, AUTO_ENCODER, VISUAL, DIFFUSION, PRETRAIN`, and can be compatible with all our open-source algorithms according to your own needs. If you have any questions, feel free to give us your feedback at any time.
 
 
 
@@ -280,12 +296,18 @@ If this repo is useful to you, please cite our corresponding technical paper.
   journal={arXiv preprint arXiv:2312.09109},
   year={2023}
 }
+@article{ma2023dreamtalk,
+  title={DreamTalk: When Expressive Talking Head Generation Meets Diffusion Probabilistic Models},
+  author={Ma, Yifeng and Zhang, Shiwei and Wang, Jiayu and Wang, Xiang and Zhang, Yingya and Deng Zhidong},
+  journal={arXiv preprint arXiv:2312.09767},
+  year={2023}
+}
 ```
 
 
 ## Acknowledgement
 
-We would like to express our gratitude for the contributions of several previous works to the development of VideoComposer. This includes, but is not limited to [Composer](https://arxiv.org/abs/2302.09778), [ModelScopeT2V](https://modelscope.cn/models/damo/text-to-video-synthesis/summary), [Stable Diffusion](https://github.com/Stability-AI/stablediffusion), [OpenCLIP](https://github.com/mlfoundations/open_clip), [WebVid-10M](https://m-bain.github.io/webvid-dataset/), [LAION-400M](https://laion.ai/blog/laion-400-open-dataset/), [Pidinet](https://github.com/zhuoinoulu/pidinet) and [MiDaS](https://github.com/isl-org/MiDaS). We are committed to building upon these foundations in a way that respects their original contributions.
+We would like to express our gratitude for the contributions of several previous works to the development of VGen. This includes, but is not limited to [Composer](https://arxiv.org/abs/2302.09778), [ModelScopeT2V](https://modelscope.cn/models/damo/text-to-video-synthesis/summary), [Stable Diffusion](https://github.com/Stability-AI/stablediffusion), [OpenCLIP](https://github.com/mlfoundations/open_clip), [WebVid-10M](https://m-bain.github.io/webvid-dataset/), [LAION-400M](https://laion.ai/blog/laion-400-open-dataset/), [Pidinet](https://github.com/zhuoinoulu/pidinet) and [MiDaS](https://github.com/isl-org/MiDaS). We are committed to building upon these foundations in a way that respects their original contributions.
 
 
 
